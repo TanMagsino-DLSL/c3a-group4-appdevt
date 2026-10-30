@@ -1,0 +1,341 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" VisualBasic.Settings="{x:Null}" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ue="clr-namespace:UiPath.Excel;assembly=UiPath.Excel.Activities" xmlns:ueab="clr-namespace:UiPath.Excel.Activities.Business;assembly=UiPath.Excel.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:umae="clr-namespace:UiPath.Mail.Activities.Enums;assembly=UiPath.Mail.Activities" xmlns:umame="clr-namespace:UiPath.MicrosoftOffice365.Activities.Mail.Enums;assembly=UiPath.Mail.Activities" xmlns:upap="clr-namespace:UiPath.PDF.Activities.PDF;assembly=UiPath.PDF.Activities" xmlns:upr="clr-namespace:UiPath.Platform.ResourceHandling;assembly=UiPath.Platform" xmlns:usau="clr-namespace:UiPath.Shared.Activities.Utils;assembly=UiPath.Mail.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.Excel.Activities.Business</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Payroll Email Automation" sap:VirtualizedContainerService.HintSize="1259,5506" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="payrollFile" />
+      <Variable x:TypeArguments="x:String" Name="payrollSheet" />
+      <Variable x:TypeArguments="x:String" Name="emailPdf" />
+      <Variable x:TypeArguments="x:Boolean" Name="testMode" />
+      <Variable x:TypeArguments="x:String" Name="testAddress" />
+      <Variable x:TypeArguments="x:String" Name="gmailUser" />
+      <Variable x:TypeArguments="x:String" Name="gmailPassword" />
+      <Variable x:TypeArguments="s:DateTime" Name="monthStart" />
+      <Variable x:TypeArguments="x:String" Name="monthLabel" />
+      <Variable x:TypeArguments="x:String" Name="periodText" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtPayroll" />
+      <Variable x:TypeArguments="x:String" Name="pdfText" />
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Name="emailById" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtLog" />
+      <Variable x:TypeArguments="x:String" Name="bodyTemplate" />
+      <Variable x:TypeArguments="x:Int32" Name="sentCount" />
+      <Variable x:TypeArguments="x:Int32" Name="failedCount" />
+      <Variable x:TypeArguments="x:Int32" Name="skippedCount" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Sequence DisplayName="1. Settings" sap:VirtualizedContainerService.HintSize="650,785" sap2010:WorkflowViewState.IdRef="Sequence_2">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <Assign x:TypeArguments="x:String" DisplayName="Payroll workbook" sap:VirtualizedContainerService.HintSize="616,54" sap2010:WorkflowViewState.IdRef="Assign`1_1" To="[payrollFile]" Value="[&quot;Employee Payroll.xlsx&quot;]" />
+      <Assign x:TypeArguments="x:String" DisplayName="Month sheet to send" sap:VirtualizedContainerService.HintSize="616,54" sap2010:WorkflowViewState.IdRef="Assign`1_2" To="[payrollSheet]" Value="[&quot;Oct 2026&quot;]" />
+      <Assign x:TypeArguments="x:String" DisplayName="PDF with the employee emails" sap:VirtualizedContainerService.HintSize="616,54" sap2010:WorkflowViewState.IdRef="Assign`1_3" To="[emailPdf]" Value="[&quot;Employee Emails.pdf&quot;]" />
+      <Assign x:TypeArguments="x:String" DisplayName="Test address (receives everything in TEST mode)" sap:VirtualizedContainerService.HintSize="616,54" sap2010:WorkflowViewState.IdRef="Assign`1_4" To="[testAddress]" Value="[&quot;johnbel_malinana@dlsl.edu.ph&quot;]" />
+      <Assign x:TypeArguments="x:String" DisplayName="Sender Gmail address" sap:VirtualizedContainerService.HintSize="616,54" sap2010:WorkflowViewState.IdRef="Assign`1_5" To="[gmailUser]" Value="[&quot;johnbel_malinana@dlsl.edu.ph&quot;]" />
+      <Assign x:TypeArguments="x:String" DisplayName="Sender Gmail APP PASSWORD: paste the 16 letters between the quotes" sap:VirtualizedContainerService.HintSize="616,54" sap2010:WorkflowViewState.IdRef="Assign`1_6" To="[gmailPassword]" Value="xxmb wgoz fold pgky" />
+      <Assign x:TypeArguments="x:Boolean" DisplayName="TEST MODE: True = send everything to the test address, False = LIVE" sap:VirtualizedContainerService.HintSize="616,54" sap2010:WorkflowViewState.IdRef="Assign`1_7" To="[testMode]" Value="False" />
+      <Assign x:TypeArguments="s:DateTime" DisplayName="First day of the month" sap:VirtualizedContainerService.HintSize="616,54" sap2010:WorkflowViewState.IdRef="Assign`1_8" To="[monthStart]" Value="[DateTime.ParseExact(&quot;1 &quot; &amp; payrollSheet, &quot;d MMM yyyy&quot;, System.Globalization.CultureInfo.InvariantCulture)]" />
+      <Assign x:TypeArguments="x:String" DisplayName="Month label (October 2026)" sap:VirtualizedContainerService.HintSize="616,54" sap2010:WorkflowViewState.IdRef="Assign`1_9" To="[monthLabel]" Value="[monthStart.ToString(&quot;MMMM yyyy&quot;, System.Globalization.CultureInfo.InvariantCulture)]" />
+      <Assign x:TypeArguments="x:String" DisplayName="Pay period text" sap:VirtualizedContainerService.HintSize="616,54" sap2010:WorkflowViewState.IdRef="Assign`1_10" To="[periodText]" Value="[monthStart.ToString(&quot;yyyy-MM-dd&quot;) &amp; &quot; to &quot; &amp; monthStart.AddMonths(1).AddDays(-1).ToString(&quot;yyyy-MM-dd&quot;)]" />
+      <Assign x:TypeArguments="x:Int32" DisplayName="Reset counters" sap:VirtualizedContainerService.HintSize="616,54" sap2010:WorkflowViewState.IdRef="Assign`1_11" To="[sentCount]" Value="[0]" />
+      <Assign x:TypeArguments="x:Int32" DisplayName="Reset failed counter" sap:VirtualizedContainerService.HintSize="616,54" sap2010:WorkflowViewState.IdRef="Assign`1_12" To="[failedCount]" Value="[0]" />
+      <Assign x:TypeArguments="x:Int32" DisplayName="Reset skipped counter" sap:VirtualizedContainerService.HintSize="616,45" sap2010:WorkflowViewState.IdRef="Assign`1_13" To="[skippedCount]" Value="[0]" />
+    </Sequence>
+    <If Condition="[String.IsNullOrWhiteSpace(gmailPassword)]" DisplayName="If the App Password was not pasted in step 1" sap:VirtualizedContainerService.HintSize="650,276" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <Throw DisplayName="Throw: App Password missing" Exception="[New Exception(&quot;Paste the Gmail App Password in step 1 (Settings), in the Assign named Sender Gmail APP PASSWORD, then run again.&quot;)]" sap:VirtualizedContainerService.HintSize="350,91" sap2010:WorkflowViewState.IdRef="Throw_1" />
+      </If.Then>
+    </If>
+    <Sequence DisplayName="2. Read the payroll (Excel)" sap:VirtualizedContainerService.HintSize="650,663" sap2010:WorkflowViewState.IdRef="Sequence_5">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ueab:ExcelProcessScopeX DisplayAlerts="{x:Null}" ExistingProcessAction="{x:Null}" FileConflictResolution="{x:Null}" LaunchMethod="{x:Null}" LaunchTimeout="{x:Null}" MacroSettings="{x:Null}" ProcessMode="{x:Null}" ShowExcelWindow="{x:Null}" DisplayName="Excel Process Scope" sap:VirtualizedContainerService.HintSize="616,571" sap2010:WorkflowViewState.IdRef="ExcelProcessScopeX_1">
+        <ueab:ExcelProcessScopeX.Body>
+          <ActivityAction x:TypeArguments="ui:IExcelProcess">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="ui:IExcelProcess" Name="ExcelProcessScopeTag" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="486,501" sap2010:WorkflowViewState.IdRef="Sequence_4">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ueab:ExcelApplicationCard DisplayName="Use Excel File: payroll workbook" sap:VirtualizedContainerService.HintSize="452,441" sap2010:WorkflowViewState.IdRef="ExcelApplicationCard_1" ResizeWindow="None" WorkbookPath="[payrollFile]">
+                <ueab:ExcelApplicationCard.Body>
+                  <ActivityAction x:TypeArguments="ue:IWorkbookQuickHandle">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="ue:IWorkbookQuickHandle" Name="Excel" />
+                    </ActivityAction.Argument>
+                    <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="450,221" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ueab:ReadRangeX DisplayName="Read Range: employees A5:AC35 of the month sheet" sap:VirtualizedContainerService.HintSize="416,161" sap2010:WorkflowViewState.IdRef="ReadRangeX_1" Range="[Excel.Sheet(payrollSheet).Range(&quot;A5:AC35&quot;)]" SaveTo="[dtPayroll]" />
+                    </Sequence>
+                  </ActivityAction>
+                </ueab:ExcelApplicationCard.Body>
+              </ueab:ExcelApplicationCard>
+            </Sequence>
+          </ActivityAction>
+        </ueab:ExcelProcessScopeX.Body>
+      </ueab:ExcelProcessScopeX>
+    </Sequence>
+    <Sequence DisplayName="3. Read the employee emails (PDF)" sap:VirtualizedContainerService.HintSize="650,382" sap2010:WorkflowViewState.IdRef="Sequence_6">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:ReadPDFText PreserveFormatting="{x:Null}" ResourceFile="{x:Null}" DisplayName="Read PDF Text: employee emails" FileName="[emailPdf]" sap:VirtualizedContainerService.HintSize="616,124" sap2010:WorkflowViewState.IdRef="ReadPDFText_1" Range="All" Text="[pdfText]">
+        <ui:ReadPDFText.Item>
+          <upap:ItemArgument x:TypeArguments="upr:IResource" ResourceFile="{x:Null}" FileName="[emailPdf]" />
+        </ui:ReadPDFText.Item>
+      </ui:ReadPDFText>
+      <Assign DisplayName="Employee ID to Email lookup (from the PDF text)" sap:VirtualizedContainerService.HintSize="616,166" sap2010:WorkflowViewState.IdRef="Assign_1">
+        <Assign.To>
+          <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[emailById]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[System.Text.RegularExpressions.Regex.Matches(pdfText, "(EMP-\d{3})[^@]*?([\w.\-]+@[\w.\-]+\.[A-Za-z]+)").Cast(Of System.Text.RegularExpressions.Match)().ToDictionary(Function(m) m.Groups(1).Value, Function(m) m.Groups(2).Value)]</InArgument>
+        </Assign.Value>
+      </Assign>
+    </Sequence>
+    <Sequence DisplayName="4. Prepare the send log and email template" sap:VirtualizedContainerService.HintSize="650,350" sap2010:WorkflowViewState.IdRef="Sequence_7">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:BuildDataTable DataTable="[dtLog]" DisplayName="Build Data Table: send log" sap:VirtualizedContainerService.HintSize="616,92" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Employee_x0020_ID&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;200&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;Employee_x0020_Name&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;200&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;Email_x0020_Sent_x0020_To&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;200&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;Status&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;200&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;Date_x0020_and_x0020_Time&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;200&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
+      <Assign DisplayName="Email body template" sap:VirtualizedContainerService.HintSize="616,166" sap2010:WorkflowViewState.IdRef="Assign_2">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[bodyTemplate]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">["&lt;html&gt;&lt;head&gt;&lt;meta charset=""utf-8""&gt;&lt;/head&gt;&lt;body style=""font-family:Calibri,Arial,sans-serif;font-size:15px;line-height:1.45;color:#222222;""&gt;{19}Hi {0},&lt;br&gt;&lt;br&gt;Here are your payroll details for {1}.&lt;br&gt;&lt;br&gt;Employee ID: {2}&lt;br&gt;Department: {3}&lt;br&gt;Position: {4}&lt;br&gt;&lt;br&gt;EARNINGS&lt;br&gt;Regular hours: {5} | OT hours: {6} | Trip days: {7}&lt;br&gt;Basic Pay: {8}&lt;br&gt;Overtime Pay: {9}&lt;br&gt;GROSS PAY: {10}&lt;br&gt;Meal Allowance: {11}&lt;br&gt;Per Diem: {12}&lt;br&gt;&lt;br&gt;DEDUCTIONS&lt;br&gt;SSS: {13}&lt;br&gt;PhilHealth: {14}&lt;br&gt;Pag-IBIG: {15}&lt;br&gt;Withholding Tax: {16}&lt;br&gt;Total Deductions: {17}&lt;br&gt;&lt;div style=""margin:14px 0;font-size:30px;font-weight:bold;color:#188038;""&gt;NET PAY: {18}&lt;/div&gt;(Net Pay = Gross Pay + Allowances - Total Deductions)&lt;br&gt;&lt;br&gt;Best Regards,&lt;br&gt;HR / Payroll Team&lt;/body&gt;&lt;/html&gt;"]</InArgument>
+        </Assign.Value>
+      </Assign>
+    </Sequence>
+    <Sequence DisplayName="5. Send the emails" sap:VirtualizedContainerService.HintSize="650,2198" sap2010:WorkflowViewState.IdRef="Sequence_13">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dtPayroll]" DisplayName="For each employee: build and send the email" sap:VirtualizedContainerService.HintSize="616,2106" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+        <ui:ForEachRow.Body>
+          <ActivityAction x:TypeArguments="sd:DataRow">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Employee" sap:VirtualizedContainerService.HintSize="522,1933" sap2010:WorkflowViewState.IdRef="Sequence_12">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="x:String" Name="empId" />
+                <Variable x:TypeArguments="x:String" Name="empName" />
+                <Variable x:TypeArguments="x:String" Name="address" />
+                <Variable x:TypeArguments="x:String" Name="status" />
+                <Variable x:TypeArguments="x:String" Name="subject" />
+                <Variable x:TypeArguments="x:String" Name="body" />
+              </Sequence.Variables>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Assign x:TypeArguments="x:String" DisplayName="Employee ID" sap:VirtualizedContainerService.HintSize="488,54" sap2010:WorkflowViewState.IdRef="Assign`1_14" To="[empId]" Value="[row(0).ToString.Trim()]" />
+              <Assign x:TypeArguments="x:String" DisplayName="Employee name" sap:VirtualizedContainerService.HintSize="488,54" sap2010:WorkflowViewState.IdRef="Assign`1_15" To="[empName]" Value="[row(1).ToString.Trim()]" />
+              <Assign x:TypeArguments="x:String" DisplayName="Reset address" sap:VirtualizedContainerService.HintSize="488,54" sap2010:WorkflowViewState.IdRef="Assign`1_16" To="[address]" Value="[&quot;&quot;]" />
+              <If Condition="[emailById.ContainsKey(empId)]" DisplayName="If the PDF has an email for this employee" sap:VirtualizedContainerService.HintSize="488,1376" sap2010:WorkflowViewState.IdRef="If_2">
+                <If.Then>
+                  <Sequence DisplayName="Send" sap:VirtualizedContainerService.HintSize="486,1046" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <Assign x:TypeArguments="x:String" DisplayName="Email address from the PDF" sap:VirtualizedContainerService.HintSize="452,54" sap2010:WorkflowViewState.IdRef="Assign`1_17" To="[address]" Value="[emailById(empId)]" />
+                    <TryCatch DisplayName="Try to send, log the error if it fails" sap:VirtualizedContainerService.HintSize="452,932" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                      <TryCatch.Try>
+                        <Sequence DisplayName="Build and send" sap:VirtualizedContainerService.HintSize="450,646" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <Assign x:TypeArguments="x:String" DisplayName="Subject" sap:VirtualizedContainerService.HintSize="416,54" sap2010:WorkflowViewState.IdRef="Assign`1_18" To="[subject]" Value="[If(testMode, &quot;[TEST] &quot;, &quot;&quot;) &amp; &quot;Payroll Details - &quot; &amp; monthLabel &amp; &quot; (&quot; &amp; empId &amp; &quot;)&quot;]" />
+                          <Assign x:TypeArguments="x:String" DisplayName="Body (template filled with this employee's payroll)" sap:VirtualizedContainerService.HintSize="416,54" sap2010:WorkflowViewState.IdRef="Assign`1_19" To="[body]" Value="[String.Format(bodyTemplate, System.Net.WebUtility.HtmlEncode(empName), periodText, empId, System.Net.WebUtility.HtmlEncode(row(2).ToString), System.Net.WebUtility.HtmlEncode(row(3).ToString), row(6), row(7), row(8), row(9), row(10), row(11), row(12), row(13), row(15), row(16), row(17), row(20), row(21), row(22), If(testMode, &quot;&lt;p style=&quot;&quot;color:#b00020;&quot;&quot;&gt;*** TEST MODE - this email is meant for &quot; &amp; address &amp; &quot; ***&lt;/p&gt;&quot;, &quot;&quot;))]" />
+                          <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" ContinueOnError="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" ReplyTo="{x:Null}" ResourceAttachmentList="{x:Null}" ResourceAttachments="{x:Null}" Result="{x:Null}" SecurePassword="{x:Null}" TimeoutMS="{x:Null}" UseOAuth="{x:Null}" Action="Forward" AttachmentInputMode="Existing" Body="[body]" ConnectionMode="LegacyConfiguration" CreatedAfterSolutionSupport="True" DisplayName="Send SMTP Mail Message (Gmail)" Email="[gmailUser]" EnableSSL="True" sap:VirtualizedContainerService.HintSize="416,379" sap2010:WorkflowViewState.IdRef="SendMail_1" IgnoreCRL="False" IsBodyHtml="True" Password="[gmailPassword]" Port="587" SecureConnection="Auto" Server="smtp.gmail.com" Subject="[subject]" To="[If(testMode, testAddress, address)]" UseISConnection="False" UseRichTextEditor="True">
+                            <ui:SendMail.AttachmentsBackup>
+                              <usau:BackupSlot x:TypeArguments="umame:AttachmentInputMode" StoredValue="Existing">
+                                <usau:BackupSlot.BackupValues>
+                                  <scg:Dictionary x:TypeArguments="umame:AttachmentInputMode, scg:List(x:Object)" />
+                                </usau:BackupSlot.BackupValues>
+                              </usau:BackupSlot>
+                            </ui:SendMail.AttachmentsBackup>
+                            <ui:SendMail.ConnectionDetailsBackupSlot>
+                              <usau:BackupSlot x:TypeArguments="umae:ConnectionDetails" StoredValue="LegacyConfiguration">
+                                <usau:BackupSlot.BackupValues>
+                                  <scg:Dictionary x:TypeArguments="umae:ConnectionDetails, scg:List(x:Object)" />
+                                </usau:BackupSlot.BackupValues>
+                              </usau:BackupSlot>
+                            </ui:SendMail.ConnectionDetailsBackupSlot>
+                            <ui:SendMail.Files>
+                              <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
+                            </ui:SendMail.Files>
+                          </ui:SendMail>
+                          <Assign x:TypeArguments="x:String" DisplayName="Status = sent" sap:VirtualizedContainerService.HintSize="416,54" sap2010:WorkflowViewState.IdRef="Assign`1_20" To="[status]" Value="[If(testMode, &quot;Sent (TEST to &quot; &amp; testAddress &amp; &quot;)&quot;, &quot;Sent&quot;)]" />
+                          <Assign x:TypeArguments="x:Int32" DisplayName="Count sent" sap:VirtualizedContainerService.HintSize="416,45" sap2010:WorkflowViewState.IdRef="Assign`1_21" To="[sentCount]" Value="[sentCount + 1]" />
+                        </Sequence>
+                      </TryCatch.Try>
+                      <TryCatch.Catches>
+                        <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                          <ActivityAction x:TypeArguments="s:Exception">
+                            <ActivityAction.Argument>
+                              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                            </ActivityAction.Argument>
+                            <Sequence DisplayName="Failed" sap:VirtualizedContainerService.HintSize="450,134" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <Assign x:TypeArguments="x:String" DisplayName="Status = failed" sap:VirtualizedContainerService.HintSize="416,54" sap2010:WorkflowViewState.IdRef="Assign`1_22" To="[status]" Value="[&quot;Failed: &quot; &amp; exception.Message]" />
+                              <Assign x:TypeArguments="x:Int32" DisplayName="Count failed" sap2010:WorkflowViewState.IdRef="Assign`1_23" To="[failedCount]" Value="[failedCount + 1]" />
+                            </Sequence>
+                          </ActivityAction>
+                        </Catch>
+                      </TryCatch.Catches>
+                    </TryCatch>
+                  </Sequence>
+                </If.Then>
+                <If.Else>
+                  <Sequence DisplayName="No email in the PDF" sap:VirtualizedContainerService.HintSize="486,159" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <Assign x:TypeArguments="x:String" DisplayName="Status = no email" sap:VirtualizedContainerService.HintSize="452,54" sap2010:WorkflowViewState.IdRef="Assign`1_24" To="[status]" Value="[&quot;No email found in PDF&quot;]" />
+                    <Assign x:TypeArguments="x:Int32" DisplayName="Count skipped" sap:VirtualizedContainerService.HintSize="452,45" sap2010:WorkflowViewState.IdRef="Assign`1_25" To="[skippedCount]" Value="[skippedCount + 1]" />
+                  </Sequence>
+                </If.Else>
+              </If>
+              <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[New Object() {empId, empName, address, status, Chr(39) &amp; Now.ToString(&quot;yyyy-MM-dd HH:mm:ss&quot;)}]" DataTable="[dtLog]" DisplayName="Add to the send log" sap:VirtualizedContainerService.HintSize="488,221" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
+              <WriteLine DisplayName="Write Line: result" sap:VirtualizedContainerService.HintSize="488,114" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[empId &amp; &quot;  &quot; &amp; empName &amp; &quot;  -&gt;  &quot; &amp; status]" />
+            </Sequence>
+          </ActivityAction>
+        </ui:ForEachRow.Body>
+      </ui:ForEachRow>
+    </Sequence>
+    <Sequence DisplayName="6. Save the send log (Excel) and show the summary" sap:VirtualizedContainerService.HintSize="650,829" sap2010:WorkflowViewState.IdRef="Sequence_16">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ueab:ExcelProcessScopeX DisplayAlerts="{x:Null}" ExistingProcessAction="{x:Null}" FileConflictResolution="{x:Null}" LaunchMethod="{x:Null}" LaunchTimeout="{x:Null}" MacroSettings="{x:Null}" ProcessMode="{x:Null}" ShowExcelWindow="{x:Null}" DisplayName="Excel Process Scope" sap:VirtualizedContainerService.HintSize="616,632" sap2010:WorkflowViewState.IdRef="ExcelProcessScopeX_2">
+        <ueab:ExcelProcessScopeX.Body>
+          <ActivityAction x:TypeArguments="ui:IExcelProcess">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="ui:IExcelProcess" Name="ExcelProcessScopeTag" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="486,553" sap2010:WorkflowViewState.IdRef="Sequence_15">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ueab:ExcelApplicationCard DisplayName="Use Excel File: Send_Log.xlsx" sap:VirtualizedContainerService.HintSize="452,493" sap2010:WorkflowViewState.IdRef="ExcelApplicationCard_2" ResizeWindow="None" WorkbookPath="Send_Log.xlsx">
+                <ueab:ExcelApplicationCard.Body>
+                  <ActivityAction x:TypeArguments="ue:IWorkbookQuickHandle">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="ue:IWorkbookQuickHandle" Name="Excel" />
+                    </ActivityAction.Argument>
+                    <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="450,273" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ueab:WriteRangeX Destination="[Excel.Sheet(&quot;Sheet1&quot;).Range(&quot;A1&quot;)]" DisplayName="Write Range: send log" sap:VirtualizedContainerService.HintSize="416,213" sap2010:WorkflowViewState.IdRef="WriteRangeX_1" IgnoreEmptySource="False" Source="[dtLog]" />
+                    </Sequence>
+                  </ActivityAction>
+                </ueab:ExcelApplicationCard.Body>
+              </ueab:ExcelApplicationCard>
+            </Sequence>
+          </ActivityAction>
+        </ueab:ExcelProcessScopeX.Body>
+      </ueab:ExcelProcessScopeX>
+      <ui:MessageBox ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" Caption="Payroll Emails" DisplayName="Message Box: summary" sap:VirtualizedContainerService.HintSize="616,114" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[&quot;Payroll emails for &quot; &amp; monthLabel &amp; vbCrLf &amp; vbCrLf &amp; sentCount.ToString &amp; &quot; sent&quot; &amp; vbCrLf &amp; failedCount.ToString &amp; &quot; failed&quot; &amp; vbCrLf &amp; skippedCount.ToString &amp; &quot; skipped (no email in the PDF)&quot; &amp; If(testMode, vbCrLf &amp; vbCrLf &amp; &quot;TEST MODE: everything went to &quot; &amp; testAddress, &quot;&quot;)]" />
+    </Sequence>
+  </Sequence>
+</Activity>

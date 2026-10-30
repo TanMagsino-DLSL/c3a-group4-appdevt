@@ -1,0 +1,6 @@
+{
+  "Name": "Payroll_Email_Automation",
+  "ProjectType": "Process",
+  "Description": "Project",
+  "MainFile": "Main.xaml"
+}
